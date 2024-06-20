@@ -15,12 +15,12 @@ public class StudentManagementSystemApplication {
         SpringApplication.run(StudentManagementSystemApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner(AppService appService) {
-        return runner -> {
-            findDepartment(appService);
-        };
-    }
+//    @Bean
+//    public CommandLineRunner commandLineRunner(AppService appService) {
+//        return runner -> {
+//            findDepartment(appService);
+//        };
+//    }
 
     private void findDepartment(AppService appService) {
 

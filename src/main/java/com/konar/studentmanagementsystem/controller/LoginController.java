@@ -9,8 +9,7 @@ public class LoginController {
 
     @GetMapping("/loginPage")
     public String loginPage() {
-        // TODO: 18-06-2024 create login page
-        return null;
+        return "login-page";
     }
 
     @GetMapping("/accessDenied")

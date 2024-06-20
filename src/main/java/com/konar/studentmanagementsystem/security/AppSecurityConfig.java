@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -24,17 +25,24 @@ public class AppSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configuror ->
-                        configuror.anyRequest().authenticated()
+                        configuror
+                                .anyRequest().authenticated()
                 )
                 .formLogin(form ->
                         form.loginPage("/loginPage")
                                 .loginProcessingUrl("/authenticateUser")
                                 .permitAll()
+                                .successHandler(customSuccessHandler())
                 )
                 .logout(LogoutConfigurer::permitAll)
                 .exceptionHandling(configuror -> configuror.accessDeniedPage("/accessDenied"));
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler customSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
     }
 
 }
