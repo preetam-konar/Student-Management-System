@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <title>Student Form</title>
+</head>
+<body>
+<div class="container">
+    <h3>Update Student</h3>
+    <hr>
+    <form action="#" th:action="@{/admin/save}" method="post" th:object="${student}">
+        <input type="hidden" th:field="*{id}">
+        <label>Register Number :
+            <input type="text" th:field="*{registerNumber}" readonly onfocus="this.blur">
+        </label>
+        <br><br>
+        <label for="firstName">First Name :
+            <input type="text" id="firstName" th:field="*{firstName}">
+        </label>
+        <br>
+        <br>
+        <label for="lastName">Last Name :
+            <input type="text" id="lastName" th:field="*{lastName}">
+        </label>
+        <br>
+        <br>
+        <label for="email">Email :
+            <input type="text" th:field="*{email}" id="email">
+        </label>
+        <br>
+        <br>
+        <label for="collegeEmail">College Email :
+            <input type="text" id="collegeEmail" th:field="*{collegeEmail}">
+        </label>
+        <br>
+        <br>
+        <label for="age">Age :
+            <input type="number" id="age" th:field="*{age}">
+        </label>
+        <br>
+        <br>
+        <label>Gender :
+            <input type="radio" th:field="*{gender}" th:value="male" required>Male
+            <input type="radio" th:field="*{gender}" th:value="female" required>Female
+        </label>
+        <br>
+        <br>
+        <label>Department :
+            <select name="dept" required>
+                <option th:each="td : ${deptList}" th:text="${td.deptName}" th:value="${td.id}"
+                        th:selected="${td.id}==*{department.id}?true:false"></option>
+            </select>
+        </label>
+        <br>
+        <br>
+        <label for="semester">Semester :
+            <select th:field="*{semester}" id="semester" required>
+                <option th:each="s : ${semList}" th:value="${s}" th:text="${s}"></option>
+            </select>
+        </label>
+        <br>
+        <br>
+        <input type="submit" value="Save">
+    </form>
+</div>
+</body>
+</html>

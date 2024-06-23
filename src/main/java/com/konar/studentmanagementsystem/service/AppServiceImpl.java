@@ -7,6 +7,8 @@ import com.konar.studentmanagementsystem.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AppServiceImpl implements AppService {
 
@@ -67,5 +69,15 @@ public class AppServiceImpl implements AppService {
     @Override
     public Department findDepartmentById(int id) {
         return deptDao.findById(id);
+    }
+
+    @Override
+    public List<Student> findAllStudents() {
+        return studentDao.findAll();
+    }
+
+    @Override
+    public List<Department> findAllDepartments() {
+        return deptDao.findAll();
     }
 }

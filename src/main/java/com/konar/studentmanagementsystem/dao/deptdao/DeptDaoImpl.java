@@ -2,9 +2,12 @@ package com.konar.studentmanagementsystem.dao.deptdao;
 
 import com.konar.studentmanagementsystem.entity.Department;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class DeptDaoImpl implements DeptDao {
@@ -38,5 +41,11 @@ public class DeptDaoImpl implements DeptDao {
     @Transactional
     public void update(Department department) {
         entityManager.merge(department);
+    }
+
+    @Override
+    public List<Department> findAll() {
+        TypedQuery<Department> query = entityManager.createQuery("from Department", Department.class);
+        return query.getResultList();
     }
 }

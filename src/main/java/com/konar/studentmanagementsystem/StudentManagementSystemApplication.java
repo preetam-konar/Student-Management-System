@@ -15,12 +15,14 @@ public class StudentManagementSystemApplication {
         SpringApplication.run(StudentManagementSystemApplication.class, args);
     }
 
-//    @Bean
-//    public CommandLineRunner commandLineRunner(AppService appService) {
-//        return runner -> {
-//            findDepartment(appService);
-//        };
-//    }
+    /*
+
+    @Bean
+    public CommandLineRunner commandLineRunner(AppService appService) {
+        return runner -> {
+            findDepartment(appService);
+        };
+    }
 
     private void findDepartment(AppService appService) {
 
@@ -32,7 +34,7 @@ public class StudentManagementSystemApplication {
     }
 
     private void createStudent(AppService appService) {
-        Department department = Department.builder().id(1).dept_name("CTECH").build();
+        Department department = Department.builder().id(1).deptName("CTECH").build();
         Student student = Student.builder()
                 .firstName("John")
                 .lastName("Doe")
@@ -49,5 +51,6 @@ public class StudentManagementSystemApplication {
         appService.saveStudent(student);
         System.out.println("Saved!");
     }
+     */
 
 }

@@ -3,6 +3,8 @@ package com.konar.studentmanagementsystem.service;
 import com.konar.studentmanagementsystem.entity.Department;
 import com.konar.studentmanagementsystem.entity.Student;
 
+import java.util.List;
+
 public interface AppService {
 
     void saveStudent(Student student);
@@ -24,6 +26,10 @@ public interface AppService {
     void updateDepartment(Department department);
 
     Department findDepartmentById(int id);
+
+    List<Student> findAllStudents();
+
+    List<Department> findAllDepartments();
 
 
 }

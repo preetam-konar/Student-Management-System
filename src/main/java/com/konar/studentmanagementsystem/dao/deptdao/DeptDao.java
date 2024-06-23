@@ -3,6 +3,8 @@ package com.konar.studentmanagementsystem.dao.deptdao;
 
 import com.konar.studentmanagementsystem.entity.Department;
 
+import java.util.List;
+
 public interface DeptDao {
 
     void save(Department department);
@@ -12,5 +14,7 @@ public interface DeptDao {
     void deleteById(int id);
 
     void update(Department department);
+
+    List<Department> findAll();
 
 }

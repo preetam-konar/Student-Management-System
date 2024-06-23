@@ -3,6 +3,7 @@ package com.konar.studentmanagementsystem.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +14,15 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-public class Department {
+public class Department implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "deptName")
-    private String dept_name;
+    @Column(name = "dept_name")
+    private String deptName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department",
             cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
@@ -38,7 +39,7 @@ public class Department {
     public String toString() {
         return "department{" +
                 "id=" + id +
-                ", dept_name='" + dept_name + '\'' +
+                ", dept_name='" + deptName + '\'' +
                 '}';
     }
 }
