@@ -4,7 +4,6 @@ import com.konar.studentmanagementsystem.entity.Department;
 import com.konar.studentmanagementsystem.entity.Student;
 import com.konar.studentmanagementsystem.service.AppService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +38,9 @@ public class AdminController {
 
     @GetMapping("/deleteStudent")
     public String deleteStudent(@RequestParam("studentId") int studentId) {
+        Student student = appService.findStudentById(studentId);
         appService.deleteStudentById(studentId);
+        appService.removeUserByUserId(student.getRegisterNumber());
         return "redirect:/admin/listStudents";
     }
 

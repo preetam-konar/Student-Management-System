@@ -1,9 +1,11 @@
 package com.konar.studentmanagementsystem.service;
 
 import com.konar.studentmanagementsystem.dao.deptdao.DeptDao;
+import com.konar.studentmanagementsystem.dao.securitydao.UserDao;
 import com.konar.studentmanagementsystem.dao.studentdao.StudentDao;
 import com.konar.studentmanagementsystem.entity.Department;
 import com.konar.studentmanagementsystem.entity.Student;
+import com.konar.studentmanagementsystem.entity.security.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +16,13 @@ public class AppServiceImpl implements AppService {
 
     private StudentDao studentDao;
     private DeptDao deptDao;
+    private UserDao userDao;
 
     @Autowired
-    AppServiceImpl(StudentDao studentDao, DeptDao deptDao) {
+    AppServiceImpl(StudentDao studentDao, DeptDao deptDao, UserDao userDao) {
         this.studentDao = studentDao;
         this.deptDao = deptDao;
+        this.userDao = userDao;
     }
 
     @Override
@@ -79,5 +83,30 @@ public class AppServiceImpl implements AppService {
     @Override
     public List<Department> findAllDepartments() {
         return deptDao.findAll();
+    }
+
+    @Override
+    public void addUser(User user) {
+        userDao.add(user);
+    }
+
+    @Override
+    public void removeUser(User user) {
+        userDao.remove(user);
+    }
+
+    @Override
+    public void removeUserByUserId(String userId) {
+        userDao.removeByUserId(userId);
+    }
+
+    @Override
+    public User findUserByUserId(String userId) {
+        return userDao.findByUserId(userId);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userDao.update(user);
     }
 }
