@@ -2,6 +2,8 @@ package com.konar.studentmanagementsystem.controller;
 
 import com.konar.studentmanagementsystem.entity.Department;
 import com.konar.studentmanagementsystem.entity.Student;
+import com.konar.studentmanagementsystem.entity.security.Role;
+import com.konar.studentmanagementsystem.entity.security.User;
 import com.konar.studentmanagementsystem.service.AppService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import java.util.List;
 public class AdminController {
 
     private AppService appService;
+
+    private String defaultPassword;
 
     @Value("${semester}")
     private List<Integer> semList;
@@ -53,7 +57,17 @@ public class AdminController {
         model.addAttribute("semList", semList);
         model.addAttribute("deptList", departmentList);
 
-        return "student-form";
+        return "student-form-admin";
+    }
+
+    @GetMapping("/showStudentFormForAdd")
+    public String showStudentFormForAdd(Model model) {
+        Student student = new Student();
+        List<Department> departmentList = appService.findAllDepartments();
+        model.addAttribute("student", student);
+        model.addAttribute("semList", semList);
+        model.addAttribute("deptList", departmentList);
+        return "student-form-admin";
     }
 
     @PostMapping("/save")
@@ -65,6 +79,15 @@ public class AdminController {
         if (appService.findStudentById(student.getId()) != null) {
             appService.updateStudent(student);
         } else {
+            defaultPassword = "{noop}test123";
+            Role role = Role.builder()
+                    .userId(student.getRegisterNumber())
+                    .role("ROLE_STUDENT").build();
+            User user = User.builder()
+                    .userId(student.getRegisterNumber())
+                    .pw(defaultPassword)
+                    .active(1).build();
+            appService.addUser(user, role);
             appService.saveStudent(student);
         }
         return "redirect:/admin/listStudents";

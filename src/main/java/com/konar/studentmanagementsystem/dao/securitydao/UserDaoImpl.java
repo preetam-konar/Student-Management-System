@@ -19,8 +19,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @Transactional
-    public void add(User user) {
+    public void add(User user, Role role) {
         entityManager.persist(user);
+        entityManager.persist(role);
     }
 
     @Override

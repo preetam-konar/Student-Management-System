@@ -1,10 +1,11 @@
 package com.konar.studentmanagementsystem.dao.securitydao;
 
+import com.konar.studentmanagementsystem.entity.security.Role;
 import com.konar.studentmanagementsystem.entity.security.User;
 
 public interface UserDao {
 
-    void add(User user);
+    void add(User user, Role role);
 
     void remove(User user);
 

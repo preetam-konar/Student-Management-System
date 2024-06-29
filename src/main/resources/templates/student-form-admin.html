@@ -14,7 +14,7 @@
     <form action="#" th:action="@{/admin/save}" method="post" th:object="${student}">
         <input type="hidden" th:field="*{id}">
         <label>Register Number :
-            <input type="text" th:field="*{registerNumber}" readonly onfocus="this.blur">
+            <input type="text" th:field="*{registerNumber}" th:readonly="${student.registerNumber != null}">
         </label>
         <br><br>
         <label for="firstName">First Name :
@@ -51,7 +51,7 @@
         <label>Department :
             <select name="dept" required>
                 <option th:each="td : ${deptList}" th:text="${td.deptName}" th:value="${td.id}"
-                        th:selected="${td.id}==*{department.id}?true:false"></option>
+                        th:selected="${student.department!=null}? (${td.id}==*{department.id}):false"></option>
             </select>
         </label>
         <br>

@@ -2,6 +2,7 @@ package com.konar.studentmanagementsystem.controller;
 
 import com.konar.studentmanagementsystem.entity.Student;
 import com.konar.studentmanagementsystem.service.AppService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,18 +16,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StudentController {
 
     private AppService appService;
+    private Authentication authentication;
+    private String currentPrincipalName;
+    private Student currStudent;
+
 
     @Autowired
     StudentController(AppService appService) {
         this.appService = appService;
     }
 
+    private void setStudent() {
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        currentPrincipalName = authentication.getName();
+        currStudent = appService.findStudentByRegister(currentPrincipalName);
+    }
+
+
     @GetMapping("/home")
     public String showHome(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        Student student = appService.findStudentByRegister(currentPrincipalName);
-        model.addAttribute("student", student);
+        setStudent();
+        model.addAttribute("student", currStudent);
         return "student-home-page";
     }
 

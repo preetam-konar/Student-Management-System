@@ -5,6 +5,7 @@ import com.konar.studentmanagementsystem.dao.securitydao.UserDao;
 import com.konar.studentmanagementsystem.dao.studentdao.StudentDao;
 import com.konar.studentmanagementsystem.entity.Department;
 import com.konar.studentmanagementsystem.entity.Student;
+import com.konar.studentmanagementsystem.entity.security.Role;
 import com.konar.studentmanagementsystem.entity.security.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,8 +87,8 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public void addUser(User user) {
-        userDao.add(user);
+    public void addUser(User user, Role role) {
+        userDao.add(user, role);
     }
 
     @Override

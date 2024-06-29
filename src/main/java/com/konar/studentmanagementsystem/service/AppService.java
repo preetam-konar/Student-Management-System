@@ -2,6 +2,7 @@ package com.konar.studentmanagementsystem.service;
 
 import com.konar.studentmanagementsystem.entity.Department;
 import com.konar.studentmanagementsystem.entity.Student;
+import com.konar.studentmanagementsystem.entity.security.Role;
 import com.konar.studentmanagementsystem.entity.security.User;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public interface AppService {
 
     List<Department> findAllDepartments();
 
-    void addUser(User user);
+    void addUser(User user, Role role);
 
     void removeUser(User user);
 
